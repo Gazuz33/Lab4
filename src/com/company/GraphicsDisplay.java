@@ -183,8 +183,23 @@ minY
         canvas.setStroke(markerStroke);
 // Выбрать красный цвет для закрашивания маркеров внутри
         canvas.setColor(Color.GREEN);
-        for (Double[] point: graphicsData)
+            for (Double[] point: graphicsData)
         {
+            canvas.setPaint(Color.RED);
+            int digit = (int)(double)point[1];
+            if (digit < 0)
+                digit *= (-1);
+            int number = 0;
+            int sum = 0;
+            for(;;)
+            {
+                number = digit%10;
+                digit /= 10;
+                sum += number;
+                if (sum > 10)    break;
+                if (digit < 1)    break;
+            }
+            if (sum < 10) canvas.setColor(Color.ORANGE);
             Point2D.Double center=xyToPoint(point[0],point[1]);
             canvas.draw(new Line2D.Double(shiftPoint(center,0,0),shiftPoint(center,-10,-10)));
             canvas.draw(new Line2D.Double(shiftPoint(center,-10,-10),shiftPoint(center,10,-10)));
