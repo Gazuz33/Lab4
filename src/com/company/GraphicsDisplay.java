@@ -41,13 +41,13 @@ public class GraphicsDisplay extends JPanel {
         setBackground(Color.WHITE);
 // Сконструировать необходимые объекты, используемые в рисовании
 // Перо для рисования графика
-        graphicsStroke = new BasicStroke(3.0f, BasicStroke.CAP_ROUND,
+        graphicsStroke = new BasicStroke(4.0f, BasicStroke.CAP_ROUND,
                 BasicStroke.JOIN_ROUND, 10.0f, new float[] { 20,5,10,5,5,5,10,5 } , 0.0f);
 // Перо для рисования осей координат
-        axisStroke = new BasicStroke(2.0f, BasicStroke.CAP_BUTT,
+        axisStroke = new BasicStroke(2.0f, BasicStroke.CAP_ROUND,
                 BasicStroke.JOIN_MITER, 10.0f, null, 0.0f);
 // Перо для рисования контуров маркеров
-        markerStroke = new BasicStroke(3.0f, BasicStroke.CAP_BUTT,
+        markerStroke = new BasicStroke(3.0f, BasicStroke.CAP_ROUND,
                 BasicStroke.JOIN_MITER, 10.0f, null, 0.0f);
 // Шрифт для подписей осей координат
         axisFont = new Font("Serif", Font.BOLD, 20);
@@ -199,7 +199,7 @@ minY
                 if (sum > 10)    break;
                 if (digit < 1)    break;
             }
-            if (sum < 10) canvas.setColor(Color.ORANGE);
+            if (sum < 10) canvas.setColor(Color.LIGHT_GRAY);
             Point2D.Double center=xyToPoint(point[0],point[1]);
             canvas.draw(new Line2D.Double(shiftPoint(center,0,0),shiftPoint(center,-10,-10)));
             canvas.draw(new Line2D.Double(shiftPoint(center,-10,-10),shiftPoint(center,10,-10)));
@@ -249,10 +249,6 @@ minY
             canvas.drawString("y", (float)labelPos.getX() + 10,
                     (float)(labelPos.getY() - bounds.getY()));
         }
-        Rectangle2D centerBounds = axisFont.getStringBounds("0", context);
-        Point2D.Double centerLabelPos = xyToPoint(0, 0);
-        canvas.drawString("0", (float)centerLabelPos.getX() + 10,
-                (float)(centerLabelPos.getY() - centerBounds.getY()));
 // Определить, должна ли быть видна ось X на графике
         if (minY<=0.0 && maxY>=0.0) {
 // Она должна быть видна, если верхняя граница показываемой области (maxX) >= 0.0,
